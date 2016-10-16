@@ -1,19 +1,24 @@
 #ifndef MAINFORM_H
 #define MAINFORM_H
 
-#include <QtWidgets/QWidget>
+#include <QtWidgets/qmainwindow.h>
 #include "ui_mainform.h"
 
-class MainForm : public QWidget
+class MainForm : public QMainWindow
 {
 	Q_OBJECT
 
 public:
-	MainForm(QWidget *parent = 0);
+	MainForm( QMainWindow* aParent = 0 );
 	~MainForm();
 
 private:
-	Ui::MainFormClass ui;
+	Ui::MainForm ui;
+
+	
+public slots:
+	void startNewStudy();
+
 };
 
 #endif // MAINFORM_H
