@@ -6,12 +6,74 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>834</width>
-    <height>522</height>
+    <width>1007</width>
+    <height>599</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainForm</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">/*--- General ---*/
+
+QToolButton:disabled:checked
+{
+	/*color: rgb(0, 0, 255); */
+	color: rgb(60, 60, 60);
+	font-weight: bold;
+	/*font-style: italic*/
+}
+
+QLineEdit:read-only
+{
+	background: palette(window);
+}
+
+QSpinBox[readOnly=&quot;true&quot;]
+{
+	background: palette(window);
+}
+
+QDoubleSpinBox[readOnly=&quot;true&quot;]
+{
+	background: palette(window);
+}
+
+/*--- SimpleDialog1 ---*/
+
+QMainWindow[Style=&quot;SimpleDialog1&quot;]
+{
+	background-color:rgb(229,226,210); 
+}
+
+QDialog[Style=&quot;SimpleDialog1&quot;] &gt; QGroupBox,
+QDialog[Style=&quot;SimpleDialog1&quot;] &gt; QWidget &gt; QGroupBox
+{
+	background-color:rgb(245,242,224);
+	border-left: 2px groove rgb(205,202,184);
+	border-top: 2px groove rgb(205,202,184);
+	border-right: 2px ridge rgb(205,202,184);
+	border-bottom: 2px ridge rgb(205,202,184);
+	border-width: 2px;
+	border-radius: 4px;
+}
+
+/*--- SimpleForm1 ---*/
+
+QWidget[Style=&quot;SimpleForm1&quot;]
+{
+}
+
+QWidget[Style=&quot;SimpleForm1&quot;] &gt; QGroupBox
+{
+	background-color:rgb(245,242,224);
+	border-left: 2px groove rgb(205,202,184);
+	border-top: 2px groove rgb(205,202,184);
+	border-right: 2px ridge rgb(205,202,184);
+	border-bottom: 2px ridge rgb(205,202,184);
+	border-width: 2px;
+	border-radius: 4px;
+}</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout">
@@ -110,20 +172,499 @@
            <string/>
           </property>
           <layout class="QGridLayout" name="gridLayout_4">
-           <item row="1" column="0">
-            <spacer name="verticalSpacer">
-             <property name="orientation">
-              <enum>Qt::Vertical</enum>
+           <item row="2" column="0" alignment="Qt::AlignLeft">
+            <widget class="QGroupBox" name="uiListWidgetGroupBox">
+             <property name="title">
+              <string/>
              </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>20</width>
-               <height>40</height>
-              </size>
-             </property>
-            </spacer>
+             <layout class="QGridLayout" name="gridLayout_5">
+              <item row="0" column="0">
+               <widget class="QListWidget" name="listWidget">
+                <property name="iconSize">
+                 <size>
+                  <width>40</width>
+                  <height>40</height>
+                 </size>
+                </property>
+                <item>
+                 <property name="text">
+                  <string>Patient</string>
+                 </property>
+                 <property name="icon">
+                  <iconset>
+                   <normaloff>bin/listIcon1.png</normaloff>bin/listIcon1.png</iconset>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Medical Status</string>
+                 </property>
+                 <property name="icon">
+                  <iconset>
+                   <normaloff>bin/listIcon1.png</normaloff>bin/listIcon1.png</iconset>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Diagnoses</string>
+                 </property>
+                 <property name="icon">
+                  <iconset>
+                   <normaloff>bin/listIcon1.png</normaloff>bin/listIcon1.png</iconset>
+                 </property>
+                </item>
+               </widget>
+              </item>
+             </layout>
+            </widget>
            </item>
-           <item row="0" column="0">
+           <item row="2" column="1">
+            <widget class="QGroupBox" name="uiStackWidgetGroupBox2">
+             <property name="title">
+              <string/>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_6">
+              <item row="0" column="0">
+               <widget class="QStackedWidget" name="stackedWidget">
+                <property name="currentIndex">
+                 <number>0</number>
+                </property>
+                <widget class="QWidget" name="patientPage">
+                 <layout class="QGridLayout" name="gridLayout_7">
+                  <property name="leftMargin">
+                   <number>0</number>
+                  </property>
+                  <property name="topMargin">
+                   <number>0</number>
+                  </property>
+                  <property name="rightMargin">
+                   <number>0</number>
+                  </property>
+                  <property name="bottomMargin">
+                   <number>0</number>
+                  </property>
+                  <item row="0" column="1">
+                   <widget class="QGroupBox" name="uiPatientGroupBox">
+                    <property name="title">
+                     <string/>
+                    </property>
+                    <layout class="QGridLayout" name="gridLayout_8">
+                     <item row="2" column="0">
+                      <widget class="QLabel" name="uiPatientLastNameLabel">
+                       <property name="text">
+                        <string>Last Name:</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="6" column="0">
+                      <widget class="QLabel" name="uiPatientGenderLabel">
+                       <property name="text">
+                        <string>Gender:</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="2" column="1">
+                      <widget class="QLineEdit" name="uiPatientLastNameLineEdit"/>
+                     </item>
+                     <item row="3" column="1">
+                      <widget class="QLineEdit" name="uiPatientFirstNameLineEdit"/>
+                     </item>
+                     <item row="3" column="0">
+                      <widget class="QLabel" name="uiPatientFirstNameLabel">
+                       <property name="text">
+                        <string>First Name:</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="4" column="0">
+                      <widget class="QLabel" name="uiPatientIDLabel">
+                       <property name="text">
+                        <string>Patient ID:</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="4" column="1">
+                      <widget class="QLineEdit" name="uiPatientIDLineEdit"/>
+                     </item>
+                     <item row="5" column="0">
+                      <widget class="QLabel" name="uiPatientBirthDateLabel">
+                       <property name="text">
+                        <string>Birth Date:</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="1" column="0">
+                      <widget class="QLabel" name="uiPatientMiddleNameLabel">
+                       <property name="text">
+                        <string>Middle Name:</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="1" column="1">
+                      <widget class="QLineEdit" name="uiPatientMiddleNameLineEdit"/>
+                     </item>
+                     <item row="0" column="0" colspan="2">
+                      <layout class="QHBoxLayout" name="_2">
+                       <item>
+                        <widget class="QLabel" name="uiPatientLabel">
+                         <property name="minimumSize">
+                          <size>
+                           <width>62</width>
+                           <height>0</height>
+                          </size>
+                         </property>
+                         <property name="font">
+                          <font>
+                           <weight>75</weight>
+                           <bold>true</bold>
+                          </font>
+                         </property>
+                         <property name="text">
+                          <string>Patient</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QPushButton" name="uiSelectPatientPushButton">
+                         <property name="minimumSize">
+                          <size>
+                           <width>90</width>
+                           <height>30</height>
+                          </size>
+                         </property>
+                         <property name="text">
+                          <string>Select</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <spacer name="horizontalSpacer_3">
+                         <property name="orientation">
+                          <enum>Qt::Horizontal</enum>
+                         </property>
+                         <property name="sizeHint" stdset="0">
+                          <size>
+                           <width>40</width>
+                           <height>20</height>
+                          </size>
+                         </property>
+                        </spacer>
+                       </item>
+                      </layout>
+                     </item>
+                     <item row="7" column="0">
+                      <widget class="QLabel" name="uiPatientWeightLabel">
+                       <property name="text">
+                        <string>Weight (kg):</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="6" column="1">
+                      <layout class="QGridLayout" name="gridLayout_10">
+                       <item row="0" column="0">
+                        <widget class="QComboBox" name="uiPatientGenderComboBox">
+                         <item>
+                          <property name="text">
+                           <string>male</string>
+                          </property>
+                         </item>
+                         <item>
+                          <property name="text">
+                           <string>female</string>
+                          </property>
+                         </item>
+                         <item>
+                          <property name="text">
+                           <string>other</string>
+                          </property>
+                         </item>
+                        </widget>
+                       </item>
+                       <item row="0" column="1">
+                        <spacer name="horizontalSpacer_5">
+                         <property name="orientation">
+                          <enum>Qt::Horizontal</enum>
+                         </property>
+                         <property name="sizeHint" stdset="0">
+                          <size>
+                           <width>40</width>
+                           <height>20</height>
+                          </size>
+                         </property>
+                        </spacer>
+                       </item>
+                      </layout>
+                     </item>
+                     <item row="5" column="1">
+                      <layout class="QGridLayout" name="gridLayout_9">
+                       <item row="0" column="2">
+                        <widget class="QLabel" name="uiPatientAgeLabel">
+                         <property name="text">
+                          <string>Age:</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="0" column="3" alignment="Qt::AlignRight">
+                        <widget class="QLineEdit" name="lineEdit">
+                         <property name="readOnly">
+                          <bool>true</bool>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="0" column="4">
+                        <spacer name="horizontalSpacer_4">
+                         <property name="orientation">
+                          <enum>Qt::Horizontal</enum>
+                         </property>
+                         <property name="sizeHint" stdset="0">
+                          <size>
+                           <width>40</width>
+                           <height>20</height>
+                          </size>
+                         </property>
+                        </spacer>
+                       </item>
+                       <item row="0" column="0">
+                        <widget class="QDateEdit" name="uiPatientBirthDateDateEdit"/>
+                       </item>
+                       <item row="0" column="1">
+                        <spacer name="horizontalSpacer_9">
+                         <property name="orientation">
+                          <enum>Qt::Horizontal</enum>
+                         </property>
+                         <property name="sizeHint" stdset="0">
+                          <size>
+                           <width>40</width>
+                           <height>20</height>
+                          </size>
+                         </property>
+                        </spacer>
+                       </item>
+                      </layout>
+                     </item>
+                     <item row="7" column="1">
+                      <layout class="QHBoxLayout" name="horizontalLayout">
+                       <item>
+                        <widget class="QLineEdit" name="uiPatientWeightLineEdit"/>
+                       </item>
+                       <item>
+                        <spacer name="horizontalSpacer_6">
+                         <property name="orientation">
+                          <enum>Qt::Horizontal</enum>
+                         </property>
+                         <property name="sizeHint" stdset="0">
+                          <size>
+                           <width>40</width>
+                           <height>20</height>
+                          </size>
+                         </property>
+                        </spacer>
+                       </item>
+                      </layout>
+                     </item>
+                     <item row="8" column="0">
+                      <widget class="QLabel" name="uiPatientHeightLabel">
+                       <property name="text">
+                        <string>Height (cm):</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="8" column="1">
+                      <layout class="QGridLayout" name="gridLayout_11">
+                       <item row="0" column="0">
+                        <widget class="QLineEdit" name="uiPatientHeightLineEdit"/>
+                       </item>
+                       <item row="0" column="1">
+                        <spacer name="horizontalSpacer_7">
+                         <property name="orientation">
+                          <enum>Qt::Horizontal</enum>
+                         </property>
+                         <property name="sizeHint" stdset="0">
+                          <size>
+                           <width>40</width>
+                           <height>20</height>
+                          </size>
+                         </property>
+                        </spacer>
+                       </item>
+                      </layout>
+                     </item>
+                    </layout>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="medicalStatusPage">
+                 <layout class="QGridLayout" name="gridLayout_12">
+                  <property name="leftMargin">
+                   <number>0</number>
+                  </property>
+                  <property name="topMargin">
+                   <number>0</number>
+                  </property>
+                  <property name="rightMargin">
+                   <number>0</number>
+                  </property>
+                  <property name="bottomMargin">
+                   <number>0</number>
+                  </property>
+                  <item row="0" column="0">
+                   <widget class="QGroupBox" name="uiMedicalStatusGroupBox">
+                    <property name="title">
+                     <string/>
+                    </property>
+                    <layout class="QGridLayout" name="gridLayout_13">
+                     <item row="0" column="0" colspan="2">
+                      <widget class="QLabel" name="uiMedicalStatusLabel">
+                       <property name="font">
+                        <font>
+                         <weight>75</weight>
+                         <bold>true</bold>
+                        </font>
+                       </property>
+                       <property name="text">
+                        <string>Medical Status</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="1" column="0" alignment="Qt::AlignLeft">
+                      <widget class="QLabel" name="uiSmokingStatusLabel">
+                       <property name="text">
+                        <string>Smoking Status:</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="1" column="2">
+                      <spacer name="horizontalSpacer_8">
+                       <property name="orientation">
+                        <enum>Qt::Horizontal</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>40</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item row="2" column="0">
+                      <widget class="QLabel" name="uiPregnancyStatusLabel">
+                       <property name="text">
+                        <string>Pregnancy Status:</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="2" column="1">
+                      <layout class="QGridLayout" name="gridLayout_15">
+                       <item row="0" column="0">
+                        <widget class="QComboBox" name="uiPregnancyStatusComboBox">
+                         <item>
+                          <property name="text">
+                           <string>No</string>
+                          </property>
+                         </item>
+                         <item>
+                          <property name="text">
+                           <string>Yes</string>
+                          </property>
+                         </item>
+                        </widget>
+                       </item>
+                      </layout>
+                     </item>
+                     <item row="1" column="1">
+                      <layout class="QGridLayout" name="gridLayout_14">
+                       <item row="0" column="0">
+                        <widget class="QComboBox" name="uiSmokingStatusComboBox">
+                         <item>
+                          <property name="text">
+                           <string>No</string>
+                          </property>
+                         </item>
+                         <item>
+                          <property name="text">
+                           <string>Yes</string>
+                          </property>
+                         </item>
+                        </widget>
+                       </item>
+                      </layout>
+                     </item>
+                     <item row="3" column="0">
+                      <widget class="QLabel" name="uiPatientHistoryLabel">
+                       <property name="text">
+                        <string>Patient History:</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="3" column="1" colspan="2">
+                      <widget class="QTextEdit" name="uiPatientHistoryTextEdit"/>
+                     </item>
+                    </layout>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="diagnosesPage">
+                 <layout class="QGridLayout" name="gridLayout_16">
+                  <property name="leftMargin">
+                   <number>0</number>
+                  </property>
+                  <property name="topMargin">
+                   <number>0</number>
+                  </property>
+                  <property name="rightMargin">
+                   <number>0</number>
+                  </property>
+                  <property name="bottomMargin">
+                   <number>0</number>
+                  </property>
+                  <item row="0" column="0">
+                   <widget class="QGroupBox" name="uiPatientDiagnosesGroupBox">
+                    <property name="title">
+                     <string/>
+                    </property>
+                    <layout class="QGridLayout" name="gridLayout_17">
+                     <item row="0" column="0">
+                      <widget class="QLabel" name="uiPatinetDiagnosesLabel">
+                       <property name="font">
+                        <font>
+                         <weight>75</weight>
+                         <bold>true</bold>
+                        </font>
+                       </property>
+                       <property name="text">
+                        <string>Diagnoses</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="1" column="0">
+                      <widget class="QTextEdit" name="uiPatientDiagnosesTextEdit"/>
+                     </item>
+                    </layout>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <spacer name="verticalSpacer">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>40</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="0" column="0" colspan="2">
             <widget class="QLabel" name="uiNewStudyLabel">
              <property name="font">
               <font>
@@ -154,7 +695,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>834</width>
+     <width>1007</width>
      <height>21</height>
     </rect>
    </property>
@@ -187,6 +728,20 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <tabstops>
+  <tabstop>listWidget</tabstop>
+  <tabstop>uiPatientMiddleNameLineEdit</tabstop>
+  <tabstop>uiPatientLastNameLineEdit</tabstop>
+  <tabstop>uiPatientFirstNameLineEdit</tabstop>
+  <tabstop>uiPatientIDLineEdit</tabstop>
+  <tabstop>uiPatientBirthDateDateEdit</tabstop>
+  <tabstop>lineEdit</tabstop>
+  <tabstop>uiPatientGenderComboBox</tabstop>
+  <tabstop>uiPatientWeightLineEdit</tabstop>
+  <tabstop>uiNewStudyPushButton</tabstop>
+  <tabstop>uiPatientHeightLineEdit</tabstop>
+  <tabstop>uiEmergencyPushButton</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

@@ -1,0 +1,6 @@
+Age calculation:
+double age = QDate::currentDate().year() - ui->_PatientBirthDate->date().year();
+	age += ui->_PatientBirthDate->date().addYears( age ).daysTo( QDate::currentDate() ) / 365.0;
+	if ( QDate::currentDate() < ui->_PatientBirthDate->date() )
+		age -= 1.0;
+	ui->_PatientAgeEdit->setText( QString::number( (int)ceil( age ) ) );
