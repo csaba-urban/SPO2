@@ -1,6 +1,16 @@
-Age calculation:
-double age = QDate::currentDate().year() - ui->_PatientBirthDate->date().year();
-	age += ui->_PatientBirthDate->date().addYears( age ).daysTo( QDate::currentDate() ) / 365.0;
-	if ( QDate::currentDate() < ui->_PatientBirthDate->date() )
-		age -= 1.0;
-	ui->_PatientAgeEdit->setText( QString::number( (int)ceil( age ) ) );
+CREATE TABLE 'patients' ('first_name' TEXT, 'middle_name' TEXT, 'last_name' TEXT, 'patient_id' TEXT PRIMARY KEY NOT NULL, 'birth_date' TEXT NOT NULL, 'gender' INTEGER NOT NULL)
+
+Studies
+study_id
+patient_id
+study_datetime
+patient_weight
+patient_height
+patient_smoking_status
+patient_pregnancy_status
+patient_history
+diagnose
+spo2_record
+
+CREATE TABLE 'studies' ('study_id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'patient_id' TEXT NOT NULL, 'study_datetime' TEXT NOT NULL, 'patient_weight' INTEGER, 'patient_height' INTEGER, 'patient_smoking_status' INTEGER, 'patient_pregnancy_status' INTEGER, 'patient_history' TEXT, 'diagnose' INTEGER, 'spo2_record' BLOB NOT NULL)
+

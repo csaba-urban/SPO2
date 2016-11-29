@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1007</width>
-    <height>599</height>
+    <width>1036</width>
+    <height>589</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -172,50 +172,21 @@ QWidget[Style=&quot;SimpleForm1&quot;] &gt; QGroupBox
            <string/>
           </property>
           <layout class="QGridLayout" name="gridLayout_4">
-           <item row="2" column="0" alignment="Qt::AlignLeft">
-            <widget class="QGroupBox" name="uiListWidgetGroupBox">
-             <property name="title">
-              <string/>
+           <item row="0" column="0" colspan="2">
+            <widget class="QLabel" name="uiNewStudyLabel">
+             <property name="font">
+              <font>
+               <pointsize>14</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
              </property>
-             <layout class="QGridLayout" name="gridLayout_5">
-              <item row="0" column="0">
-               <widget class="QListWidget" name="listWidget">
-                <property name="iconSize">
-                 <size>
-                  <width>40</width>
-                  <height>40</height>
-                 </size>
-                </property>
-                <item>
-                 <property name="text">
-                  <string>Patient</string>
-                 </property>
-                 <property name="icon">
-                  <iconset>
-                   <normaloff>bin/listIcon1.png</normaloff>bin/listIcon1.png</iconset>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Medical Status</string>
-                 </property>
-                 <property name="icon">
-                  <iconset>
-                   <normaloff>bin/listIcon1.png</normaloff>bin/listIcon1.png</iconset>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Diagnoses</string>
-                 </property>
-                 <property name="icon">
-                  <iconset>
-                   <normaloff>bin/listIcon1.png</normaloff>bin/listIcon1.png</iconset>
-                 </property>
-                </item>
-               </widget>
-              </item>
-             </layout>
+             <property name="text">
+              <string>New Study</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
             </widget>
            </item>
            <item row="2" column="1">
@@ -225,9 +196,9 @@ QWidget[Style=&quot;SimpleForm1&quot;] &gt; QGroupBox
              </property>
              <layout class="QGridLayout" name="gridLayout_6">
               <item row="0" column="0">
-               <widget class="QStackedWidget" name="stackedWidget">
+               <widget class="QStackedWidget" name="uiNewStudyDetailsStackedWidget">
                 <property name="currentIndex">
-                 <number>0</number>
+                 <number>2</number>
                 </property>
                 <widget class="QWidget" name="patientPage">
                  <layout class="QGridLayout" name="gridLayout_7">
@@ -256,13 +227,6 @@ QWidget[Style=&quot;SimpleForm1&quot;] &gt; QGroupBox
                        </property>
                       </widget>
                      </item>
-                     <item row="6" column="0">
-                      <widget class="QLabel" name="uiPatientGenderLabel">
-                       <property name="text">
-                        <string>Gender:</string>
-                       </property>
-                      </widget>
-                     </item>
                      <item row="2" column="1">
                       <widget class="QLineEdit" name="uiPatientLastNameLineEdit"/>
                      </item>
@@ -286,6 +250,40 @@ QWidget[Style=&quot;SimpleForm1&quot;] &gt; QGroupBox
                      <item row="4" column="1">
                       <widget class="QLineEdit" name="uiPatientIDLineEdit"/>
                      </item>
+                     <item row="6" column="0">
+                      <widget class="QLabel" name="uiPatientGenderLabel">
+                       <property name="text">
+                        <string>Gender:</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="7" column="0">
+                      <widget class="QLabel" name="uiPatientWeightLabel">
+                       <property name="text">
+                        <string>Weight (kg):</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="7" column="1">
+                      <layout class="QHBoxLayout" name="horizontalLayout">
+                       <item>
+                        <widget class="QLineEdit" name="uiPatientWeightLineEdit"/>
+                       </item>
+                       <item>
+                        <spacer name="horizontalSpacer_6">
+                         <property name="orientation">
+                          <enum>Qt::Horizontal</enum>
+                         </property>
+                         <property name="sizeHint" stdset="0">
+                          <size>
+                           <width>40</width>
+                           <height>20</height>
+                          </size>
+                         </property>
+                        </spacer>
+                       </item>
+                      </layout>
+                     </item>
                      <item row="5" column="0">
                       <widget class="QLabel" name="uiPatientBirthDateLabel">
                        <property name="text">
@@ -293,15 +291,69 @@ QWidget[Style=&quot;SimpleForm1&quot;] &gt; QGroupBox
                        </property>
                       </widget>
                      </item>
+                     <item row="5" column="1">
+                      <layout class="QGridLayout" name="gridLayout_9">
+                       <item row="0" column="2">
+                        <widget class="QLabel" name="uiPatientAgeLabel">
+                         <property name="text">
+                          <string>Age:</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="0" column="3" alignment="Qt::AlignRight">
+                        <widget class="QLineEdit" name="uiPatientAgeLineEdit">
+                         <property name="readOnly">
+                          <bool>true</bool>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="0" column="4">
+                        <spacer name="horizontalSpacer_4">
+                         <property name="orientation">
+                          <enum>Qt::Horizontal</enum>
+                         </property>
+                         <property name="sizeHint" stdset="0">
+                          <size>
+                           <width>40</width>
+                           <height>20</height>
+                          </size>
+                         </property>
+                        </spacer>
+                       </item>
+                       <item row="0" column="0">
+                        <widget class="QDateEdit" name="uiPatientBirthDateDateEdit"/>
+                       </item>
+                       <item row="0" column="1">
+                        <spacer name="horizontalSpacer_9">
+                         <property name="orientation">
+                          <enum>Qt::Horizontal</enum>
+                         </property>
+                         <property name="sizeHint" stdset="0">
+                          <size>
+                           <width>40</width>
+                           <height>20</height>
+                          </size>
+                         </property>
+                        </spacer>
+                       </item>
+                      </layout>
+                     </item>
+                     <item row="8" column="0">
+                      <widget class="QLabel" name="uiPatientHeightLabel">
+                       <property name="text">
+                        <string>Height (cm):</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="1" column="1">
+                      <widget class="QLineEdit" name="uiPatientMiddleNameLineEdit"/>
+                     </item>
                      <item row="1" column="0">
                       <widget class="QLabel" name="uiPatientMiddleNameLabel">
                        <property name="text">
                         <string>Middle Name:</string>
                        </property>
                       </widget>
-                     </item>
-                     <item row="1" column="1">
-                      <widget class="QLineEdit" name="uiPatientMiddleNameLineEdit"/>
                      </item>
                      <item row="0" column="0" colspan="2">
                       <layout class="QHBoxLayout" name="_2">
@@ -352,13 +404,6 @@ QWidget[Style=&quot;SimpleForm1&quot;] &gt; QGroupBox
                        </item>
                       </layout>
                      </item>
-                     <item row="7" column="0">
-                      <widget class="QLabel" name="uiPatientWeightLabel">
-                       <property name="text">
-                        <string>Weight (kg):</string>
-                       </property>
-                      </widget>
-                     </item>
                      <item row="6" column="1">
                       <layout class="QGridLayout" name="gridLayout_10">
                        <item row="0" column="0">
@@ -394,80 +439,6 @@ QWidget[Style=&quot;SimpleForm1&quot;] &gt; QGroupBox
                         </spacer>
                        </item>
                       </layout>
-                     </item>
-                     <item row="5" column="1">
-                      <layout class="QGridLayout" name="gridLayout_9">
-                       <item row="0" column="2">
-                        <widget class="QLabel" name="uiPatientAgeLabel">
-                         <property name="text">
-                          <string>Age:</string>
-                         </property>
-                        </widget>
-                       </item>
-                       <item row="0" column="3" alignment="Qt::AlignRight">
-                        <widget class="QLineEdit" name="lineEdit">
-                         <property name="readOnly">
-                          <bool>true</bool>
-                         </property>
-                        </widget>
-                       </item>
-                       <item row="0" column="4">
-                        <spacer name="horizontalSpacer_4">
-                         <property name="orientation">
-                          <enum>Qt::Horizontal</enum>
-                         </property>
-                         <property name="sizeHint" stdset="0">
-                          <size>
-                           <width>40</width>
-                           <height>20</height>
-                          </size>
-                         </property>
-                        </spacer>
-                       </item>
-                       <item row="0" column="0">
-                        <widget class="QDateEdit" name="uiPatientBirthDateDateEdit"/>
-                       </item>
-                       <item row="0" column="1">
-                        <spacer name="horizontalSpacer_9">
-                         <property name="orientation">
-                          <enum>Qt::Horizontal</enum>
-                         </property>
-                         <property name="sizeHint" stdset="0">
-                          <size>
-                           <width>40</width>
-                           <height>20</height>
-                          </size>
-                         </property>
-                        </spacer>
-                       </item>
-                      </layout>
-                     </item>
-                     <item row="7" column="1">
-                      <layout class="QHBoxLayout" name="horizontalLayout">
-                       <item>
-                        <widget class="QLineEdit" name="uiPatientWeightLineEdit"/>
-                       </item>
-                       <item>
-                        <spacer name="horizontalSpacer_6">
-                         <property name="orientation">
-                          <enum>Qt::Horizontal</enum>
-                         </property>
-                         <property name="sizeHint" stdset="0">
-                          <size>
-                           <width>40</width>
-                           <height>20</height>
-                          </size>
-                         </property>
-                        </spacer>
-                       </item>
-                      </layout>
-                     </item>
-                     <item row="8" column="0">
-                      <widget class="QLabel" name="uiPatientHeightLabel">
-                       <property name="text">
-                        <string>Height (cm):</string>
-                       </property>
-                      </widget>
                      </item>
                      <item row="8" column="1">
                       <layout class="QGridLayout" name="gridLayout_11">
@@ -664,21 +635,239 @@ QWidget[Style=&quot;SimpleForm1&quot;] &gt; QGroupBox
              </layout>
             </widget>
            </item>
-           <item row="0" column="0" colspan="2">
-            <widget class="QLabel" name="uiNewStudyLabel">
-             <property name="font">
-              <font>
-               <pointsize>14</pointsize>
-               <weight>75</weight>
-               <bold>true</bold>
-              </font>
+           <item row="2" column="0" alignment="Qt::AlignLeft">
+            <widget class="QGroupBox" name="uiListWidgetGroupBox">
+             <property name="title">
+              <string/>
              </property>
-             <property name="text">
-              <string>New Study</string>
+             <layout class="QGridLayout" name="gridLayout_5">
+              <item row="0" column="0">
+               <widget class="QListWidget" name="uiNewStudyDeatilsListWidget">
+                <property name="iconSize">
+                 <size>
+                  <width>40</width>
+                  <height>40</height>
+                 </size>
+                </property>
+                <property name="currentRow">
+                 <number>0</number>
+                </property>
+                <item>
+                 <property name="text">
+                  <string>Patient</string>
+                 </property>
+                 <property name="icon">
+                  <iconset>
+                   <normaloff>bin/listIcon1.png</normaloff>bin/listIcon1.png</iconset>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Medical Status</string>
+                 </property>
+                 <property name="icon">
+                  <iconset>
+                   <normaloff>bin/listIcon1.png</normaloff>bin/listIcon1.png</iconset>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Diagnoses</string>
+                 </property>
+                 <property name="icon">
+                  <iconset>
+                   <normaloff>bin/listIcon1.png</normaloff>bin/listIcon1.png</iconset>
+                 </property>
+                </item>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="3" column="0" colspan="2">
+            <widget class="QGroupBox" name="groupBox_2">
+             <property name="title">
+              <string/>
              </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
+             <layout class="QGridLayout" name="gridLayout_18">
+              <item row="0" column="1">
+               <widget class="QPushButton" name="uiSaveAndAcquireStudyPushButton">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>50</height>
+                 </size>
+                </property>
+                <property name="font">
+                 <font>
+                  <pointsize>10</pointsize>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Save and Acquire Study</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="2">
+               <widget class="QPushButton" name="uiSaveStudyAndExitPushButton">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>50</height>
+                 </size>
+                </property>
+                <property name="font">
+                 <font>
+                  <pointsize>10</pointsize>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Save and Exit</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="3">
+               <widget class="QPushButton" name="uiExitFromStudyPushButton">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>50</height>
+                 </size>
+                </property>
+                <property name="font">
+                 <font>
+                  <pointsize>10</pointsize>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Exit</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0">
+               <spacer name="horizontalSpacer_10">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="acquisitionPage">
+       <layout class="QGridLayout" name="gridLayout_34">
+        <item row="0" column="0">
+         <widget class="QGroupBox" name="groupBox_3">
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <property name="title">
+           <string/>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_19">
+           <item row="1" column="1">
+            <widget class="QGroupBox" name="uiSpoGroupBox">
+             <property name="title">
+              <string/>
              </property>
+             <layout class="QGridLayout" name="gridLayout_20">
+              <item row="0" column="0">
+               <widget class="QLabel" name="label">
+                <property name="font">
+                 <font>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>SpO2</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QGroupBox" name="uiSpoTrendGroupBox">
+             <property name="title">
+              <string/>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_21">
+              <item row="0" column="0">
+               <widget class="QLabel" name="uiSpoTrendLabel">
+                <property name="font">
+                 <font>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>SpO2 Trend</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QGroupBox" name="uiHeartRateGroupBox">
+             <property name="title">
+              <string/>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_22">
+              <item row="0" column="0">
+               <widget class="QLabel" name="uiHeartRateLabel">
+                <property name="font">
+                 <font>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Heart Rate</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QGroupBox" name="uiHeartRateTrendGroupBox">
+             <property name="title">
+              <string/>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_23">
+              <item row="0" column="0">
+               <widget class="QLabel" name="uiHeartRateTrendLabel">
+                <property name="font">
+                 <font>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Heart Rate Trend</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
             </widget>
            </item>
           </layout>
@@ -695,7 +884,7 @@ QWidget[Style=&quot;SimpleForm1&quot;] &gt; QGroupBox
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1007</width>
+     <width>1036</width>
      <height>21</height>
     </rect>
    </property>
@@ -729,13 +918,13 @@ QWidget[Style=&quot;SimpleForm1&quot;] &gt; QGroupBox
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <tabstops>
-  <tabstop>listWidget</tabstop>
+  <tabstop>uiNewStudyDeatilsListWidget</tabstop>
   <tabstop>uiPatientMiddleNameLineEdit</tabstop>
   <tabstop>uiPatientLastNameLineEdit</tabstop>
   <tabstop>uiPatientFirstNameLineEdit</tabstop>
   <tabstop>uiPatientIDLineEdit</tabstop>
   <tabstop>uiPatientBirthDateDateEdit</tabstop>
-  <tabstop>lineEdit</tabstop>
+  <tabstop>uiPatientAgeLineEdit</tabstop>
   <tabstop>uiPatientGenderComboBox</tabstop>
   <tabstop>uiPatientWeightLineEdit</tabstop>
   <tabstop>uiNewStudyPushButton</tabstop>
