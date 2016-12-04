@@ -4,8 +4,7 @@
 #include <QDate>
 
 // Memory representation of the patient's info
-class Patient
-{
+class Patient {
 public:
 	Patient();
 	~Patient();
@@ -17,10 +16,11 @@ public:
 	const QString& middleName() const;
 	const QString& lastName() const;
 	QString name() const;
-	const QString& patientID() const;
+	const QString& patientID();
 	const QDate& birthDate() const;
 	EGender gender() const;
 	EStatus status() const;
+	QString genderString() const;
 
 	void setFirstName( const QString& aFirstName ) { mFirstName = aFirstName; }
 	void setMiddleName( const QString& aMiddleName ) { mMiddleName = aMiddleName; }
@@ -28,6 +28,7 @@ public:
 	void setPatientID( const QString& aPatientID ) { mPatientID = aPatientID; }
 	void setBirthDate( const QDate& aBirthDate ) { mBirthDate = aBirthDate; }
 	void setGenderName( EGender aGender ) { mGender = aGender; }
+	void setGenderName( const QString& aGender ) { mGender = genderFromString( aGender ); }
 	void setStatus( EStatus aStatus ) { mStatus = aStatus; }
 
 private:
@@ -38,4 +39,6 @@ private:
 	QDate mBirthDate;
 	EGender mGender;
 	EStatus mStatus;
+
+	static EGender genderFromString( const QString& aGender );
 };

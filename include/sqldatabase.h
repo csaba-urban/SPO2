@@ -25,7 +25,7 @@ public:
 	/*
 		inserts a Patient into the database
 	*/
-	bool insertPatient( const Patient& aPatient );
+	bool insertPatient( Patient& aPatient );
 
 	/*
 		logically deletes (sets the active property to 0) patient by the patient's ID
@@ -53,6 +53,16 @@ public:
 	bool insertStudy( const Study& aStudy );
 
 	/*
+		logically deletes (sets the active property to 0) study by the study's ID
+	*/
+	bool deleteStudy( int aStudyID );
+
+	/*
+		gets the studies by the patient's ID
+	*/
+	bool getStudiesByPatientID( const QString& aPatientID, QList<Study>& aStudies );
+
+	/*
 		returns the last error
 	*/
 	const QString& lastError() { return mLastError; }
@@ -67,5 +77,6 @@ private:
 	QString getQueryError( const QSqlQuery& aQuery ) const;
 	QString lastQueryToString( QSqlQuery& aQuery ) const;
 	bool getPatientFromQuery( const QSqlQuery& aQuery, Patient& aPatient );
+	bool getStudiesFromQuery( const QSqlQuery& aQuery, Study& aStudy );
 };
 

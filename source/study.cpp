@@ -60,3 +60,13 @@ Study::EStatus Study::status() const
 {
 	return mStatus;
 }
+
+void Study::setPatientSmokingStatusAsStr( const QString& aSmokingStatusStr )
+{
+	if ( aSmokingStatusStr.toLower() == "no" )
+		mSmokingStatus = ESmokingStatus::ENoSmoking;
+	else if ( aSmokingStatusStr.toLower() == "yes" )
+		mSmokingStatus = ESmokingStatus::ESmoking;
+	else if ( aSmokingStatusStr.toLower() == "former" )
+		mSmokingStatus = ESmokingStatus::EFormerSmoker;
+}

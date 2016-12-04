@@ -1,64 +1,74 @@
 #include "mainform.h"
-#include "serialport.h"
+
 
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QSplashscreen>
 #include <QtCore/Qthread>
 #include <QtCore/QDebug>
+#include <QMessageBox>
+#include <QDir>
 
 #include <sqldatabase.h>
 #include <patient.h>
+#include <Log.h>
+
+#include <shlobj.h>
+#include <iostream>
+
+LOG_INIT( "SPO2.main" );
+
+bool getLogFolder( const QString& aSoftwareName, QString& aLogFolder, wchar_t* aError )
+{
+	WCHAR commonApplicationDataFolder[ MAX_PATH + 1 ] = { 0 };
+	if ( !SUCCEEDED( SHGetFolderPath( 0, CSIDL_COMMON_APPDATA, 0, SHGFP_TYPE_CURRENT, commonApplicationDataFolder ) ) )
+	{
+		aError = L"Cannot get 'COMMON_APPDATA' folder location.";
+		std::wcerr << aError << std::endl;
+		return false;
+	}
+
+	aLogFolder = QString::fromStdWString( std::wstring( commonApplicationDataFolder ) + L"/" + aSoftwareName.toStdWString() + L"/Log" );
+	return true;
+}
+
+void createLogFolder()
+{
+	wchar_t* error = nullptr;
+	QString logFolder;
+	if ( !getLogFolder( "SPO2", logFolder, error ) )
+	{
+		qDebug() << "Failed to get log folder. Reason: " << error;
+	}
+
+	QDir dir;
+	if ( !dir.mkpath( logFolder ) )
+	{
+		qDebug() << "Failed to create log folder path: ." << logFolder;
+	}
+}
 
 int main(int argc, char *argv[])
 {
 	QApplication a(argc, argv);
 	MainForm w;
 
+	createLogFolder();
 
-	DCB dcb;
-	memset( &dcb, 0, sizeof( dcb ) );
-	dcb.DCBlength = sizeof( dcb );
-	dcb.BaudRate = 19200;
-	//dcb.fBinary = 1;
-	dcb.Parity = NOPARITY;
-	dcb.fParity = FALSE;
-	dcb.ByteSize = 8;
-	dcb.StopBits = ONESTOPBIT;
+	QString configPath( QApplication::applicationDirPath() + "\\logConfig.xml" );
+	Log::configure( configPath.toStdString().c_str() );
 
-	//SerialPort serialPort;
-	//bool result = serialPort.open( "\\\\.\\COM5", dcb );
-	//bool result = serialPort.open( "c:\\Users\\Urban Csaba\\Documents\\SoftwareProjects\\SPO2\\sample\\out.bin", 
-	//	"c:\\Users\\Urban Csaba\\Documents\\SoftwareProjects\\SPO2\\sample\\sample.bin" );
-
-	
-	//const int INPUT_DATA_BLOCK_MAX_SIZE = 5;
-	//static char inpData[ INPUT_DATA_BLOCK_MAX_SIZE ];
-
-	//unsigned char* packetData;
-	//int inpDataSize, packetDataLen;
-
-	//while ( true )
-	//{
-	//	inpDataSize = serialPort.read( inpData, INPUT_DATA_BLOCK_MAX_SIZE );
-	//	
-	//	qDebug() << "-----------------";
-	//	qDebug() << "Waveform: " << (int)inpData[ 1 ];
-	//	qDebug() << "HR:       " << (int)inpData[ 3 ];
-	//	qDebug() << "O2:       " << (int)inpData[ 4 ];
-	//	qDebug() << "-----------------";
-	//}
+	LOG_INFO( "SPO2 started." );
 
 	SQLDatabase db;
 
-	bool res = db.open( "c:\\Users\\Urban Csaba\\Documents\\SoftwareProjects\\SPO2\\database\\spo2_database.sqlite" );
+	if ( !db.open( QApplication::applicationDirPath() + "\\spo2_database.sqlite" ) )
+	{
+		QString error( QString( "Failed to open the database. Reason: %1" ).arg( db.lastError() ) );
+		LOG_ERROR( error.toStdString().c_str() );
+		QMessageBox::critical( nullptr, "SPO2", error );
+	}
 
-	Patient p;
-	db.getPatientByName("a", "a", "a",p );
-
-	db.deletePatient( "1" );
-
-	QList<Patient> pp;
-	db.getAllPatient( pp );
+	w.setDatabase( db );
 
 	QPixmap pixmap( "cms50_splash.jpg" );
 	QSplashScreen splashScreen( pixmap );
@@ -70,5 +80,7 @@ int main(int argc, char *argv[])
 	w.show();
 	splashScreen.finish( &w );
 
-	return a.exec();
+	int retVal = a.exec();
+	LOG_INFO( "SPO2 exited." );
+	return retVal;
 }

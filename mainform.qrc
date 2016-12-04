@@ -1,4 +1,5 @@
 <RCC>
-    <qresource prefix="MainForm">
-    </qresource>
+  <qresource prefix="MainForm">
+    <file>bin/heartbeats.png</file>
+  </qresource>
 </RCC>

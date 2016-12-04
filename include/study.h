@@ -30,6 +30,7 @@ public:
 	void setPatientWeight( int aPatientWeight_kg ) { mPatientWeight_kb = aPatientWeight_kg; }
 	void setPatientHeight( int aPatientHeight_cm ) { mPatientHeight_cm = aPatientHeight_cm; }
 	void setPatientSmokingStatus( ESmokingStatus aSmokingStatus ) { mSmokingStatus = aSmokingStatus; }
+	void setPatientSmokingStatusAsStr( const QString& aSmokingStatusStr );
 	void setPatientHistory( const QString& aPatientHistory ) { mPatientHistory = aPatientHistory; }
 	void setDiagnose( const QString& aDiagnose ) { mDiagnose = aDiagnose; }
 	void setSPO2Record( const QByteArray& aSPO2Record ) { mSPO2Record = aSPO2Record; }

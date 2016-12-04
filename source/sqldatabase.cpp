@@ -40,26 +40,26 @@ void SQLDatabase::close()
 	mSqlDatabase.close();
 }
 
-bool SQLDatabase::insertPatient( const Patient& aPatient )
+bool SQLDatabase::insertPatient( Patient& aPatient )
 {
 	QSqlQuery q( mSqlDatabase );
 
 	q.prepare( QString( "INSERT INTO %1 \
-			(				\
-			first_name,		\
-			middle_name,	\
-			last_name,		\
-			patient_id,		\
-			birth_date,		\
-			gender			\
-			)				\
-			VALUES (?,?,?,?,?,?)" ).arg( PatientDatabaseTableName ) );
+			(\
+			first_name,\
+			middle_name,\
+			last_name,\
+			patient_id,\
+			birth_date,\
+			gender\
+			)\
+			VALUES (?,?,?,?,?,?);" ).arg( PatientDatabaseTableName ) );
 
 	q.addBindValue( aPatient.firstName() );
 	q.addBindValue( aPatient.middleName() );
 	q.addBindValue( aPatient.lastName() );
 	q.addBindValue( aPatient.patientID() );
-	q.addBindValue( aPatient.birthDate().toString( "yyyy.MM.dd" ) );
+	q.addBindValue( aPatient.birthDate().toString( "yyyyMMdd" ) );
 	q.addBindValue( aPatient.gender() );
 
 	QString queryString = q.lastQuery();
@@ -200,6 +200,52 @@ bool SQLDatabase::insertStudy( const Study& aStudy )
 	return true;
 }
 
+bool SQLDatabase::deleteStudy( int aStudyID )
+{
+	QSqlQuery q( mSqlDatabase );
+
+	q.prepare( QString( "UPDATE %1 SET active = 0 WHERE study_id = ?;" ).arg( StudiesDatabaseTableName ) );
+
+	q.addBindValue( aStudyID );
+
+	if ( !q.exec() )
+	{
+		mLastError = QString( "Failed to delete study ( StudyID = %1 ) from the database. Reason: %2" ).arg( QString::number( aStudyID ), getQueryError( q ) );
+		return false;
+	}
+
+	return true;
+	
+	return true;
+}
+
+bool SQLDatabase::getStudiesByPatientID( const QString& aPatientID, QList<Study>& aStudies )
+{
+	aStudies.clear();
+
+	QSqlQuery q( mSqlDatabase );
+
+	q.prepare( QString( "SELECT * FROM %1 WHERE patient_id = ? AND active = 1;" ).arg( StudiesDatabaseTableName ) );
+
+	q.addBindValue( aPatientID );
+
+	if ( !q.exec() )
+	{
+		mLastError = QString( "Failed to query the studies from the database. Reason: %1" ).arg( getQueryError( q ) );
+		return false;
+	}
+
+	while ( q.next() )
+	{
+		Study study;
+		getStudiesFromQuery( q, study );
+
+		aStudies.append( study );
+	}
+
+	return true;
+}
+
 QString SQLDatabase::getQueryError( const QSqlQuery& aQuery ) const
 {
 	return aQuery.lastError().databaseText() + " " + aQuery.lastError().driverText();
@@ -230,6 +276,21 @@ bool SQLDatabase::getPatientFromQuery( const QSqlQuery& aQuery, Patient& aPatien
 	aPatient.setGenderName( Patient::EGender( aQuery.value( "gender" ).toInt() ) );
 	aPatient.setBirthDate( aQuery.value( "birth_date" ).toDate() );
 	aPatient.setPatientID( aQuery.value( "patient_id" ).toString() );
+
+	return true;
+}
+
+bool SQLDatabase::getStudiesFromQuery( const QSqlQuery& aQuery, Study& aStudy )
+{
+	aStudy.setStudyID( aQuery.value( "study_id" ).toInt() );
+	aStudy.setPatientID( aQuery.value( "patient_id" ).toString() );
+	aStudy.setStudyDateTime( aQuery.value( "study_datetime" ).toDateTime() );
+	aStudy.setPatientWeight( aQuery.value( "patient_weight" ).toInt() );
+	aStudy.setPatientHeight( aQuery.value( "patient_height" ).toInt() );
+	aStudy.setPatientSmokingStatus( Study::ESmokingStatus( aQuery.value( "patient_smoking_status" ).toInt() ) );
+	aStudy.setPatientHistory( aQuery.value( "patient_history" ).toString() );
+	aStudy.setDiagnose( aQuery.value( "diagnose" ).toString() );
+	aStudy.setSPO2Record( aQuery.value( "spo2_record" ).toByteArray() );
 
 	return true;
 }
