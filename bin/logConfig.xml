@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+	<appender name="SPO2" class="org.apache.log4j.rolling.RollingFileAppender">
+		<param name="Threshold" value="ALL" />
+		<param name="File" value="${ProgramData}/SPO2/Log/SPO2.log" />
+		<param name="encoding" value="UTF-8" />
+
+		<rollingPolicy class="org.apache.log4j.rolling.FixedWindowRollingPolicy">
+			<param name="FileNamePattern" value="${ProgramData}/SPO2/Log/SPO2-%i.log" />
+			<param name="MaxIndex" value="12" />
+		</rollingPolicy>
+
+		<triggeringPolicy class="org.apache.log4j.rolling.SizeBasedTriggeringPolicy">
+			<param name="MaxFileSize" value="10MB" />
+		</triggeringPolicy>
+
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{ISO8601} %-6p [%X{user}][%X{session}] %m%n"/>
+		</layout>
+	</appender>
+	<root>
+		<priority value="ALL" />
+		<appender-ref ref="SPO2"/>
+	</root>
+</log4j:configuration>

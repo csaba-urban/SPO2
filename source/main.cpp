@@ -70,12 +70,11 @@ int main(int argc, char *argv[])
 
 	w.setDatabase( db );
 
-	QPixmap pixmap( "cms50_splash.jpg" );
+	QPixmap pixmap( QApplication::applicationDirPath() + "\\cms50_splash.jpg" );
 	QSplashScreen splashScreen( pixmap );
 	
 	splashScreen.show();
-	a.processEvents();
-	//QThread::sleep( 3 );
+	QThread::sleep( 5 );
 	
 	w.show();
 	splashScreen.finish( &w );

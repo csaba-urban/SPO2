@@ -20,6 +20,8 @@ MainForm::MainForm( QMainWindow* aParent )
 
 	ui.uiStackedWidget->setCurrentIndex( STACKED_WIDGET_FIRST_PAGE );
 
+	mDataFileStream.reset( new QDataStream( &mDataFile ) );
+
 	connect( ui.uiNewStudyPushButton, &QPushButton::released, this, &MainForm::pushButtonClicked );
 	connect( ui.uiExitFromStudyPushButton, &QPushButton::released, this, &MainForm::pushButtonClicked );
 	connect( ui.uiNewStudyDeatilsListWidget, &QListWidget::currentTextChanged, this, &MainForm::newStudyDeatilsListWidgetCurrentTextChaned );
@@ -147,8 +149,8 @@ void MainForm::dataAvailableOnSerialPort()
 	}
 
 	//write serial data to the file via this stream object
-	int size = mDataFileStream.writeRawData( inpData, INPUT_DATA_BLOCK_MAX_SIZE );
-
+	int size = mDataFileStream->writeRawData( inpData, INPUT_DATA_BLOCK_MAX_SIZE );
+	
 	int HR = (int)inpData[ 3 ];
 	int SPO2 = (int)inpData[ 4 ];
 
@@ -182,10 +184,9 @@ void MainForm::dataAvailableOnSerialPort()
 		mHeartRateTrendQCustomPlot->xAxis->setRange( key, 8, Qt::AlignRight );
 		mHeartRateTrendQCustomPlot->replot();
 	}
-	
 
 	//qDebug() << "-----------------";
-	qDebug() << "Waveform: " << (int)inpData[ 1 ];
+	//qDebug() << "Waveform: " << (int)inpData[ 1 ];
 	//qDebug() << "HR:       " << (int)inpData[ 3 ];
 	//qDebug() << "O2:       " << (int)inpData[ 4 ];
 	//qDebug() << "-----------------";
@@ -365,15 +366,13 @@ bool MainForm::startSession()
 	//create temp data file
 	QString dataPath( QApplication::applicationDirPath() + "\\deviceData.dat" );
 	mDataFile.setFileName( dataPath );
-	if ( !mDataFile.open( QIODevice::ReadWrite ) )
+	if ( !mDataFile.open( QIODevice::WriteOnly ) )
 	{
 		QString error( QString( "Failed to create temporary data file (%1). Reason: %2" ).arg( mDataFile.errorString() ) );
 		LOG_ERROR( error.toStdString().c_str() );
 		QMessageBox::critical( this, "SPO2", error );
 		return false;
 	}
-	
-	mDataFileStream.setDevice( &mDataFile );
 
 	//try to open the serial port
 	if ( !mSerialPort.open( "\\\\.\\COM5", dcb ) )
@@ -395,10 +394,22 @@ bool MainForm::endSession()
 	mSerialPort.close();
 	showStatusBarMessage( "Device disconnected! Session end..." );
 
-	QByteArray data( mDataFile.readAll() );
+	mDataFile.close();
+	if ( !mDataFile.open( QIODevice::ReadOnly ) )
+	{
+		QString error( QString( "Failed to reopen temporary data file (%1). Reason: %2" ).arg( mDataFile.errorString() ) );
+		LOG_ERROR( error.toStdString().c_str() );
+		QMessageBox::critical( this, "SPO2", error );
+		return false;
+	}
+
+	QByteArray data = mDataFile.readAll();
+	if ( data.size() == 0 )
+	{
+		LOG_WARN( "Temporary saved data's size is null." );
+	}
 	
 	Study study( getStudy( data ) );
-
 	if ( !mDatabase->insertStudy( study ) )
 	{
 		QString error( mDatabase->lastError() );

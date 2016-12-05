@@ -42,7 +42,7 @@ private:
 	QCustomPlot* mHeartRateTrendQCustomPlot;
 
 	QFile mDataFile;
-	QDataStream mDataFileStream; //this stream will be used for storing the incoming data from the serial port
+	QScopedPointer<QDataStream> mDataFileStream; //this stream will be used for storing the incoming data from the serial port
 
 	/*
 		clears the textboxes on the Patient, Medical Status and Diagnoses pages
